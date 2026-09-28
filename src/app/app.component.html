@@ -1,0 +1,194 @@
+<main>
+  <audio #music [attr.src]="musicSource" preload="none" loop
+    (playing)="musicPlaying.set(true); musicError.set(false)"
+    (pause)="musicPlaying.set(false)"
+    (error)="musicPlaying.set(false); musicError.set(true)"></audio>
+  @if (opening() || opened()) {
+    <div class="music-control">
+      @if (musicError()) {
+        <span class="music-notice" role="status">No se pudo reproducir. Toca para reintentar.</span>
+      }
+      <button type="button" (click)="toggleMusic()" [disabled]="!musicSource"
+        [attr.aria-label]="!musicSource ? 'Música próximamente' : musicPlaying() ? 'Pausar música' : 'Reproducir música'"
+        [attr.title]="!musicSource ? 'Música próximamente' : musicPlaying() ? 'Pausar música' : 'Reproducir música'">
+        <i class="fa-solid" [class.fa-pause]="musicPlaying()" [class.fa-play]="!musicPlaying()" aria-hidden="true"></i>
+        <span>{{ !musicSource ? 'Música próximamente' : musicPlaying() ? 'Pausar música' : 'Escuchar música' }}</span>
+      </button>
+    </div>
+  }
+  <section class="cover" aria-labelledby="invitation-title">
+    <div class="cover-border" aria-hidden="true"></div>
+    <header class="cover-heading">
+      <p class="eyebrow">UN DÍA PARA BRILLAR</p>
+      <h1 id="invitation-title">Yanet</h1>
+      <p class="second-name">Guadalupe</p>
+      <div class="subtitle"><span></span> MIS QUINCE AÑOS <span></span></div>
+    </header>
+
+    <div class="envelope-area" [class.is-opening]="opening() || opened()">
+      @if (opening()) {
+        <span class="envelope-magic" aria-hidden="true">
+          <span class="magic-glow"></span>
+          @for (sparkle of sparkles; track $index) {
+            <span class="magic-particle" [class.magic-star]="sparkle.star"
+              [style.--travel-x]="sparkle.x" [style.--travel-y]="sparkle.y"
+              [style.--particle-size]="sparkle.size" [style.--delay]="sparkle.delay"
+              [style.--rotation]="sparkle.rotation"></span>
+          }
+        </span>
+      }
+      <button class="envelope" type="button" (click)="openInvitation()"
+        [disabled]="opening() || opened()" [attr.aria-expanded]="opened()"
+        aria-controls="invitation-details" aria-label="Abrir la invitación de XV años de Yanet">
+        <span class="envelope-back"></span>
+        <span class="letter" aria-hidden="true"><span class="letter-star">✧</span><span>Un día mágico</span><em>comienza contigo.</em><span class="letter-monogram">Y</span></span>
+        <span class="envelope-front"></span>
+        <span class="envelope-flap"></span>
+        <span class="seal" aria-hidden="true"><span>Y</span></span>
+      </button>
+    </div>
+    <div class="cover-prompt" aria-live="polite">
+      @if (opening()) {
+        <p>La magia está por comenzar…</p>
+      } @else if (opened()) {
+        <a href="#invitation-details">Descubre la invitación <span aria-hidden="true">↓</span></a>
+      } @else {
+        <p>Hay momentos que merecen compartirse.</p>
+        <span class="tap-hint">TOCA EL SOBRE PARA ABRIRLO <span aria-hidden="true">↗</span></span>
+      }
+    </div>
+    <p class="cover-footer">UNA INVITACIÓN ESPECIAL PARA TI</p>
+  </section>
+
+  <section #details id="invitation-details" class="details" [hidden]="!opened()" tabindex="-1" aria-labelledby="details-title">
+    <span class="sky-corner top-left" aria-hidden="true"></span>
+    <span class="sky-corner top-right" aria-hidden="true"></span>
+    <span class="sky-corner bottom-left" aria-hidden="true"></span>
+    <span class="sky-corner bottom-right" aria-hidden="true"></span>
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-12 col-md-6 mx-auto">
+                    <div class="photo-placeholder" role="img" aria-label="Espacio para una fotografía de Yanet"><span aria-hidden="true">✧</span><p>Próximamente</p></div>
+        </div>
+        </div>
+      <div class="intro">
+          <br>
+        <span class="ornament" aria-hidden="true">✧</span>
+        <p class="eyebrow">MIS XV AÑOS</p>
+        <h2 id="details-title">Un sueño que<br><em>hoy florece</em></h2>
+        <p>Hay sueños que se pintan de azul y recuerdos que brillan para siempre. Me encantará compartir contigo este momento tan especial.</p>
+        <span class="signature full-name">Yanet Guadalupe</span>
+      </div>
+      <div class="celebration-date">
+        <p class="eyebrow">ACOMPÁÑAME A CELEBRAR</p>
+        <time  datetime="2026-11-14">14 de noviembre de 2026</time>
+      </div>
+      <section class="countdown" aria-labelledby="countdown-title">
+        <p class="eyebrow" id="countdown-title">CADA VEZ FALTA MENOS</p>
+        @if (countdown().finished) {
+          <p class="countdown-finished">¡Llegó el momento de celebrar!</p>
+        } @else {
+          <div class="countdown-units" role="timer" aria-live="off" aria-label="Tiempo restante para la misa">
+            <div><strong>{{ countdown().days }}</strong><span>Días</span></div>
+            <div><strong>{{ countdown().hours.toString().padStart(2, '0') }}</strong><span>Horas</span></div>
+            <div><strong>{{ countdown().minutes.toString().padStart(2, '0') }}</strong><span>Minutos</span></div>
+            <div><strong>{{ countdown().seconds.toString().padStart(2, '0') }}</strong><span>Segundos</span></div>
+          </div>
+        }
+      </section>
+      <div class="row g-4 family-grid">
+        <div class="col-12 col-md-6">
+          <section class="family" aria-labelledby="parents-title">
+            <p class="eyebrow" id="parents-title">CON EL AMOR DE MIS PAPÁS</p>
+            <p>Sr. Miguel Ángel Morales Gómez<br>Sra. Marisol Méndez Reyes</p>
+          </section>
+        </div>
+        <div class="col-12 col-md-6">
+          <section class="family" aria-labelledby="godparents-title">
+            <p class="eyebrow" id="godparents-title">MIS PADRINOS DE ACCIÓN DE GRACIAS</p>
+            <p>Sr. Denis Alberto Almendra Pérez<br>Sra. Maribel López Almeida</p>
+          </section>
+        </div>
+      </div>
+      <div class="row g-4 event-grid">
+        <div class="col-12 col-md-6">
+          <article class="event-card">
+            <span class="card-symbol" aria-hidden="true">  <i class="fa-solid fa-church"></i></span>
+            <p class="eyebrow">ACOMPAÑA MI GRATITUD</p>
+            <h3 class="gold-accent">Misa de acción de gracias</h3>
+            <p class="event-time"><time class="gold-accent" datetime="2026-11-14T12:00">12:00 hrs</time></p>
+            <p>Capilla San Antonio María Vianey</p>
+            <small>Parroquia San Pedro y San Pablo Apóstol</small>
+            <address>Calle Aniceto Calcáneo, s/n<br>Jalapa, Tabasco</address>
+            <a class="location-button" href="https://www.google.com/maps/search/?api=1&query=Capilla%20San%20Antonio%20Mar%C3%ADa%20Vianey%2C%20Calle%20Aniceto%20Calc%C3%A1neo%20s/n%2C%20Jalapa%2C%20Tabasco%2C%20M%C3%A9xico" target="_blank"
+               rel="noopener noreferrer" aria-label="Ver ubicación de la misa en Google Maps (abre en otra pestaña)"><i class="fa-solid fa-map-pin"></i> Ver ubicación</a>
+          </article>
+        </div>
+        <div class="col-12 col-md-6">
+          <article class="event-card">
+            <span class="card-symbol" aria-hidden="true"><i class="fa-solid fa-champagne-glasses "></i></span>
+            <p class="eyebrow">CELEBREMOS JUNTOS</p>
+            <h3 class="gold-accent">Recepción</h3>
+            <p class="event-time"><time class="gold-accent" datetime="2026-11-14T13:00">13:00 hrs</time></p>
+            <p>Casino Ganadero</p>
+            <address>Calle Carlos A. Madrazo, s/n<br>Jalapa, Tabasco</address>
+            <a class="location-button" href="https://www.google.com/maps/search/?api=1&query=Casino%20Ganadero%2C%20Calle%20Carlos%20A.%20Madrazo%20s/n%2C%20Jalapa%2C%20Tabasco%2C%20M%C3%A9xico"
+               target="_blank" rel="noopener noreferrer" aria-label="Ver ubicación de la recepción en Google Maps (abre en otra pestaña)"><i class="fa-solid fa-map-pin"></i>Ver ubicación</a>
+          </article>
+        </div>
+      </div>
+      <section class="dress-code extra-section" aria-labelledby="dress-title">
+          <span class="ornament" aria-hidden="true">
+            <svg width="76" height="64" viewBox="0 0 88 72" fill="currentColor" aria-hidden="true" focusable="false">
+              <!-- Vestido de gala con silueta rellena -->
+              <path d="M13 7h5v7q7 7 14 0V7h5v12l-8 12c1 10 9 22 15 32-12 7-26 7-38 0 6-10 14-22 15-32l-8-12Z"/>
+              <!-- Chaqueta; el cuello y las solapas quedan en negativo -->
+              <path fill-rule="evenodd" d="m56 9-10 7-4 33 8 2 4-24v37h26V27l3 24 5-2-4-33-10-7-7 27Zm0 5 8 25-10-10 4-4-6-3Zm18 0 4 8-6 3 4 4-7 10Z"/>
+              <!-- Moño relleno -->
+              <path d="m66 15-6-4v9l6-3h2l6 3v-9l-6 4Z"/>
+              <path d="M61 7h12l-6 5Z"/>
+              <!-- Detalles de la chaqueta -->
+              <path d="M71 40h6M67 43v20" stroke="#f6f2e9" stroke-width="1.5"/>
+              <circle cx="71" cy="49" r="1.2" fill="#f6f2e9"/>
+              <circle cx="71" cy="55" r="1.2" fill="#f6f2e9"/>
+            </svg>
+          </span>
+        <p class="eyebrow">UN DETALLE IMPORTANTE</p>
+        <h3 class="gold-accent" id="dress-title">Código de vestimenta</h3>
+        <p>El color <strong>azul está reservado exclusivamente para la quinceañera.</strong></p>
+        <p>Gracias por elegir otro color para acompañarme en este día tan especial.</p>
+      </section>
+      <section class="photo-gallery extra-section" aria-labelledby="photos-title">
+        <p class="eyebrow">RECUERDOS QUE BRILLAN</p>
+        <h3 class="gold-accent" id="photos-title">Mis momentos</h3>
+        <div class="photo-grid">
+          <div class="photo-placeholder" role="img" aria-label="Espacio para una fotografía de Yanet"><span aria-hidden="true">✧</span><p>Próximamente</p></div>
+          <div class="photo-placeholder" role="img" aria-label="Espacio para una segunda fotografía de Yanet"><span aria-hidden="true">✧</span><p>Próximamente</p></div>
+          <div class="photo-placeholder" role="img" aria-label="Espacio para una tercera fotografía de Yanet"><span aria-hidden="true">✧</span><p>Próximamente</p></div>
+        </div>
+      </section>
+      <section class="gift-note" aria-labelledby="gift-title">
+        <span class="ornament" aria-hidden="true"><i class="fa-solid fa-gift"></i></span>
+        <p class="eyebrow">UN DETALLE CON CARIÑO</p>
+        <h3 class="gold-accent" id="gift-title">Tu presencia es nuestro mejor regalo</h3>
+        <p>Pero si deseas tener un detalle adicional y no sabes qué elegir, agradeceremos que sea en efectivo.</p>
+        <span class="gift-label">Regalo en sobre</span>
+      </section>
+      <div class="closing">
+        <span class="ornament" aria-hidden="true">✦</span>
+        <h3>El mejor regalo será<br><em>compartirlo contigo.</em></h3>
+        <p>Con mucho cariño, te esperamos para compartir este día inolvidable.</p>
+        <div class="attendance">
+          @if (attendanceUrl; as url) {
+            <a class="attendance-button" [href]="url" target="_blank" rel="noopener noreferrer">Confirmar asistencia por WhatsApp <span aria-hidden="true">↗</span></a>
+          } @else {
+            <button class="attendance-button" type="button" disabled aria-describedby="attendance-pending">Confirmar asistencia por WhatsApp</button>
+            <p id="attendance-pending">La confirmación de asistencia estará disponible próximamente.</p>
+          }
+        </div>
+        <a href="#invitation-title" class="back-link">VOLVER A LA PORTADA ↑</a>
+      </div>
+      <footer>YANET GUADALUPE <span>✧</span> MIS QUINCE AÑOS</footer>
+    </div>
+  </section>
+</main>

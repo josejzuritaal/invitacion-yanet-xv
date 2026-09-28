@@ -1,0 +1,91 @@
+@import 'bootstrap/dist/css/bootstrap-grid.min.css';
+
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #060f25; color: #f7efd9; font-family: 'Montserrat', Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { font: inherit; }
+a { color: inherit; }
+[hidden] { display: none !important; }
+::selection { background: #c6a961; color: #08152f; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+/* Grano de papel sobre el tono crema de la invitación. */
+app-root .details { background-image: url('/images/texturas/lienzo.png'); background-size: 180px 180px; }
+
+/* Secciones adicionales de la invitación. */
+app-root {
+  .extra-section { margin: 56px auto 0; text-align: center; }
+  .dress-code { max-width: 540px; padding: 26px 18px; border-block: 1px solid #daceb6; }
+  .extra-section .eyebrow { color: #20364BFF; }
+  .dress-code p:not(.eyebrow) { font-size: 13px; line-height: 1.9; color: #62707b; }
+  .dress-code strong { color: #20364b; font-weight: 500; }
+  .photo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
+  .photo-placeholder { aspect-ratio: 3 / 4; border: 1px solid #c9b88f; background: #ede5d54d; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #8a703c; }
+  .photo-placeholder > span { font-size: 32px; }
+  .photo-placeholder p { font-size: 10px; letter-spacing: .06em; }
+  .attendance { margin-top: 28px; }
+  .attendance-button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; max-width: 100%; padding: 16px 22px; background: #20364b; color: #f6f2e9; border: 1px solid #20364b; border-radius: 3px; font-size: 12px; line-height: 1.6; text-decoration: none; }
+  .attendance-button:disabled { opacity: .6; cursor: not-allowed; }
+  .attendance-button:focus-visible { outline: 2px solid #8a703c; outline-offset: 4px; }
+  .attendance-button[href]:hover { background: #304f6c; }
+  @media (max-width: 480px) { .photo-grid { gap: 8px; } .photo-placeholder p { font-size: 8px; letter-spacing: 0; } }
+}
+
+app-root .location-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 44px;
+  max-width: 100%;
+  margin-top: 20px;
+  padding: 12px 20px;
+  border: 1px solid #9a7c40;
+  border-radius: 3px;
+  color: #20364b;
+  background: #f6f2e9;
+  font-size: 12px;
+  text-decoration: none;
+  &:hover { background: #e9dfc9; }
+  &:focus-visible { outline: 2px solid #20364b; outline-offset: 4px; }
+}
+
+app-root .music-control {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 20;
+  max-width: calc(100vw - 32px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  button { display: inline-flex; gap: 10px; align-items: center; min-height: 48px; padding: 12px 18px; border-radius: 28px; border: 1px solid #c9b88f; background: #20364b; color: #f6f2e9; box-shadow: 0 4px 18px #0002; font-size: 12px; cursor: pointer; }
+  button:disabled { cursor: default; background: #52616b; }
+  button:focus-visible { outline: 2px solid #a08243; outline-offset: 4px; }
+  .music-notice { max-width: 250px; padding: 10px; background: #f6f2e9; color: #20364b; border: 1px solid #c9b88f; border-radius: 8px; font-size: 12px; }
+}
+app-root .details { padding-bottom: 92px; }
+
+/* Una sola ráfaga de estrellas al abrir el sobre. */
+app-root {
+  .envelope-area { position: relative; }
+  .envelope-magic { position: absolute; inset: 0; z-index: 8; pointer-events: none; font-size: clamp(12px, 3.5vw, 20px); }
+  .magic-particle { position: absolute; left: 50%; top: 48%; width: var(--particle-size); height: var(--particle-size); background: #ffe5a0; border-radius: 50%; opacity: 0; box-shadow: 0 0 11px #ffda79; animation: envelope-sparkle 2.8s var(--delay) cubic-bezier(.15,.65,.3,1) both; }
+  .magic-star { background: #fff2c9; border-radius: 0; clip-path: polygon(50% 0, 62% 37%, 100% 50%, 62% 63%, 50% 100%, 38% 63%, 0 50%, 38% 37%); }
+  .magic-glow { position: absolute; left: 50%; top: 48%; width: 210px; height: 210px; border-radius: 50%; background: radial-gradient(circle, #ffe7ad88, #e5b75222 40%, transparent 70%); animation: envelope-glow 3s .15s both; }
+}
+@keyframes envelope-sparkle {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(.2); }
+  15% { opacity: 1; }
+  65% { opacity: .85; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--travel-x)), calc(-50% + var(--travel-y))) rotate(var(--rotation)) scale(.3); }
+}
+@keyframes envelope-glow {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(.2); }
+  25% { opacity: .85; }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(2); }
+}
+@media (prefers-reduced-motion: reduce) { app-root .envelope-magic { display: none; } }
