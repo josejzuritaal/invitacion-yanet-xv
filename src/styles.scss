@@ -31,6 +31,34 @@ app-root {
   .attendance-button:focus-visible { outline: 2px solid #8a703c; outline-offset: 4px; }
   .attendance-button[href]:hover { background: #304f6c; }
   @media (max-width: 480px) { .photo-grid { gap: 8px; } .photo-placeholder p { font-size: 8px; letter-spacing: 0; } }
+
+
+
+
+  .foto-principal {
+    width: 100%;
+    max-width: 900px;
+    margin: 24px auto;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid rgba(157, 134, 75, 0.6);
+    border-radius: 6px;
+    box-shadow: 0 12px 30px rgba(80, 65, 35, 0.12);
+  }
+
+  .foto-principal img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 3px;
+  }
+
+  @media (max-width: 576px) {
+    .foto-principal {
+      padding: 6px;
+      margin: 16px auto;
+    }
+  }
 }
 
 app-root .location-button {

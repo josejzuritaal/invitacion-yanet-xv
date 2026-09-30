@@ -22,7 +22,7 @@ export function countdownAt(now: number) {
 export class AppComponent implements OnInit, OnDestroy {
   @ViewChild('music') music?: ElementRef<HTMLAudioElement>;
   // Al agregar la canción en public/audio, configura aquí su ruta /audio/archivo.mp3.
-  readonly musicSource: string | null = '/audio/songs-xv.mp3';
+  readonly musicSource: string | null = '/audio/xv.mp3';
   readonly musicPlaying = signal(false);
   readonly musicError = signal(false);
 
