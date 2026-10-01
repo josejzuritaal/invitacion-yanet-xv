@@ -44,7 +44,7 @@ jobs:
       - name: Subir sitio compilado
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist/mi-proyecto
+          path: ./dist/mi-proyecto/browser
 
   deploy:
     environment:
