@@ -22,7 +22,7 @@ export function countdownAt(now: number) {
 export class AppComponent implements OnInit, OnDestroy {
   @ViewChild('music') music?: ElementRef<HTMLAudioElement>;
   // Al agregar la canción en public/audio, configura aquí su ruta /audio/archivo.mp3.
-  readonly musicSource: string | null = '/audio/xv.mp3';
+  readonly musicSource: string | null = '/audio/sky.mp3';
   readonly musicPlaying = signal(false);
   readonly musicError = signal(false);
 
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   @ViewChild('details') details?: ElementRef<HTMLElement>;
   // Número internacional sin espacios ni signo +. Pendiente de confirmar.
-  readonly attendancePhone = '';
+  readonly attendancePhone = '529321190754';
   readonly attendanceMessage = '¡Hola! Quiero confirmar mi asistencia a los XV años de Yanet Guadalupe el 14 de noviembre de 2026. Mi nombre es: ';
   get attendanceUrl(): string | null {
     return this.attendancePhone ? `https://wa.me/${this.attendancePhone}?text=${encodeURIComponent(this.attendanceMessage)}` : null;

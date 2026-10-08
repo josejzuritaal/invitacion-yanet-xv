@@ -43,7 +43,7 @@ h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(40px, 7
 .event-card .event-time { color: #8a703c; font-size: 24px !important; font-family: 'Cormorant Garamond', Georgia, serif; }
 .gift-note { max-width: 560px; text-align: center; margin: 60px auto 0; padding: 30px 16px; border-block: 1px solid #daceb6; }
 .gift-note p:not(.eyebrow) { font-size: 13px; line-height: 2; color: #62707b; }
-.gift-label { display: block; color: #8a703c; font-size: 11px; letter-spacing: .1em; margin-top: 20px; }
+.gift-label { display: block; color: #8a703c; font-size: 23px; letter-spacing: .1em; margin-top: 1px; }
 
 .countdown { max-width: 520px; margin: 0 auto 48px; text-align: center; color: #8a703c; }
 .countdown-units { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(6px, 2vw, 16px); margin-top: 22px; }

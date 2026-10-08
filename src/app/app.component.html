@@ -41,7 +41,7 @@
         [disabled]="opening() || opened()" [attr.aria-expanded]="opened()"
         aria-controls="invitation-details" aria-label="Abrir la invitación de XV años de Yanet">
         <span class="envelope-back"></span>
-        <span class="letter" aria-hidden="true"><span class="letter-star">✧</span><span>Un día mágico</span><em>comienza contigo.</em><span class="letter-monogram">Y</span></span>
+        <span class="letter" aria-hidden="true"><span class="letter-star">✧</span><span>Un día mágico</span><em>comienza contigo.</em></span>
         <span class="envelope-front"></span>
         <span class="envelope-flap"></span>
         <span class="seal" aria-hidden="true"><span>Y</span></span>
@@ -150,6 +150,11 @@
           </span>
         <p class="eyebrow">UN DETALLE IMPORTANTE</p>
         <h3 class="gold-accent" id="dress-title">Código de vestimenta</h3>
+          <div class="dress-formal">
+              <span class="dress-line"></span>
+              <span class="dress-text">FORMAL</span>
+              <span class="dress-line"></span>
+          </div>
         <p>El color <strong>azul está reservado exclusivamente para la quinceañera.</strong></p>
         <p>Gracias por elegir otro color para acompañarme en este día tan especial.</p>
       </section>
@@ -167,25 +172,43 @@
                 </div>
             </div>
       </section>
-      <section class="gift-note" aria-labelledby="gift-title">
-        <span class="ornament" aria-hidden="true"><i class="fa-solid fa-gift"></i></span>
-        <p class="eyebrow">UN DETALLE CON CARIÑO</p>
-        <h3 class="gold-accent" id="gift-title">Tu presencia es nuestro mejor regalo</h3>
-        <p>Pero si deseas tener un detalle adicional y no sabes qué elegir, agradeceremos que sea en efectivo.</p>
-        <span class="gift-label">Regalo en sobre</span>
-      </section>
+        <section class="gift-note" aria-labelledby="gift-title">
+
+  <span class="ornament" aria-hidden="true">
+    <i class="fa-solid fa-gift"></i>
+  </span>
+
+            <p class="eyebrow">UN DETALLE CON CARIÑO</p>
+
+            <h3 class="gold-accent" id="gift-title">
+                Tu presencia es nuestro mejor regalo
+            </h3>
+
+            <p class="gift-message">
+                Si deseas tener un detalle adicional,
+                agradeceré de corazón tu muestra de cariño.
+            </p>
+
+            <span class="gift-label">
+    <i class="fa-regular fa-envelope"></i>
+    Regalo en sobre
+  </span>
+
+        </section>
       <div class="closing">
         <span class="ornament" aria-hidden="true">✦</span>
         <h3>El mejor regalo será<br><em>compartirlo contigo.</em></h3>
         <p>Con mucho cariño, te esperamos para compartir este día inolvidable.</p>
         <div class="attendance">
           @if (attendanceUrl; as url) {
-            <a class="attendance-button" [href]="url" target="_blank" rel="noopener noreferrer">Confirmar asistencia por WhatsApp <span aria-hidden="true">↗</span></a>
+            <a class="attendance-button" [href]="url" target="_blank" rel="noopener noreferrer">Confirmar asistencia por WhatsApp <span aria-hidden="true">  <!-- solid style -->
+  <i class="fa-brands fa-whatsapp"></i></span></a>
           } @else {
             <button class="attendance-button" type="button" disabled aria-describedby="attendance-pending">Confirmar asistencia por WhatsApp</button>
             <p id="attendance-pending">La confirmación de asistencia estará disponible próximamente.</p>
           }
         </div>
+
         <a href="#invitation-title" class="back-link">VOLVER A LA PORTADA ↑</a>
       </div>
       <footer>YANET GUADALUPE <span>✧</span> MIS QUINCE AÑOS</footer>
