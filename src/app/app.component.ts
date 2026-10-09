@@ -47,7 +47,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   @ViewChild('details') details?: ElementRef<HTMLElement>;
   // Número internacional sin espacios ni signo +. Pendiente de confirmar.
-  readonly attendancePhone = '529321190754';
+  readonly attendancePhone = '529321692536';
   readonly attendanceMessage = '¡Hola! Quiero confirmar mi asistencia a los XV años de Yanet Guadalupe el 14 de noviembre de 2026. Mi nombre es: ';
   get attendanceUrl(): string | null {
     return this.attendancePhone ? `https://wa.me/${this.attendancePhone}?text=${encodeURIComponent(this.attendanceMessage)}` : null;
